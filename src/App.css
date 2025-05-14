@@ -91,7 +91,6 @@ h2 {
   border-color: #007bff;
 }
 
-/* Contraseña con botón de mostrar */
 .password-container {
   display: flex;
   align-items: center;
@@ -120,13 +119,11 @@ h2 {
   background: #555;
 }
 
-/* Selector de rol */
 .user-role-selection {
   margin-bottom: 20px;
   text-align: left;
 }
 
-/* Botón de enviar */
 .submit-button {
   background-color: #007bff;
   padding: 12px;

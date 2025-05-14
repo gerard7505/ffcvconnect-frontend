@@ -4,7 +4,7 @@ import "./Noticias.css";
 const Noticias = () => {
   const [showMore, setShowMore] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [cvFile, setCvFile] = useState(null);
+ 
 
   const noticias = [
     {
@@ -119,9 +119,6 @@ const Noticias = () => {
     );
   };
 
-  const goToStart = () => {
-    setCurrentIndex(0); 
-  };
 
   const handleToggle = () => {
     setShowMore(!showMore);

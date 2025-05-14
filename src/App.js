@@ -6,10 +6,9 @@ import Noticias from "./Noticias";
 import Ofertas from "./Ofertas";
 import MiCuenta from "./MiCuenta";
 import QuienesSomos from "./QuienesSomos";
-import Historia    from "./Historia";
-import Soporte    from "./Soporte";
-import Testimonios    from "./Testimonios";
-
+import Historia from "./Historia";
+import Soporte from "./Soporte";
+import Testimonios from "./Testimonios";
 
 const App = () => {
   const [email, setEmail] = useState("");
@@ -26,14 +25,14 @@ const App = () => {
     address: "",
     city: "",
     dateOfBirth: "",
-    password: ""
+    password: "",
   });
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [userProfile, setUserProfile] = useState(null); 
+  const [userProfile, setUserProfile] = useState(null);
   const [currentPage, setCurrentPage] = useState("inicio");
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -79,11 +78,11 @@ const App = () => {
       setPassword("");
       setUserType("");
       localStorage.setItem("user", JSON.stringify({ ...loggedUser, tipo_usuario: userType }));
-
     } catch (err) {
       setError("Hubo un problema con el inicio de sesión. Inténtalo de nuevo.");
     }
   };
+
   const handleLogout = () => {
     setIsAuthenticated(false);
     setUser(null);
@@ -91,6 +90,7 @@ const App = () => {
     setMessage("Has cerrado sesión correctamente.");
     setUserProfile(null);
   };
+
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -129,7 +129,7 @@ const App = () => {
         address: "",
         city: "",
         dateOfBirth: "",
-        password: ""
+        password: "",
       });
       setIsRegistering(false);
     } catch (err) {
@@ -137,64 +137,6 @@ const App = () => {
     }
   };
 
-  const handleViewProfile = async () => {
-    setError("");
-    setMessage("");
-    let apiUrl = "";
-    if (userType === "Jugador") {
-      apiUrl = `http://localhost:8000/api/jugadores/email/${userEmail}`;
-    } else if (userType === "Club") {
-      apiUrl = `http://localhost:8000/api/clubs/email/${userEmail}`;
-    }
-    try {
-      const response = await fetch(apiUrl, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.error || "Error al obtener el perfil");
-      }
-      setUserProfile(result);
-      setCurrentPage("miCuenta"); 
-    } catch (err) {
-      setError("Hubo un problema al obtener el perfil. Inténtalo de nuevo.");
-    }
-  };
-  
-  const handleEditProfile = async () => {
-    setError("");
-    setMessage("");
-    let apiUrl = "";
-    const updatedData = userType === "Jugador"
-      ? formData
-      : { name: formData.name, city: formData.city, password: formData.password };
-    if (userType === "Jugador") {
-      apiUrl = `http://localhost:8000/api/jugadores/email/${userEmail}`;
-    } else if (userType === "Club") {
-      apiUrl = `http://localhost:8000/api/clubs/email/${userEmail}`;
-    }
-    try {
-      const response = await fetch(apiUrl, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedData),
-      });
-      const result = await response.json();
-      if (!response.ok) {
-        throw new Error(result.error || "Error al actualizar el perfil");
-      }
-      setMessage("Perfil actualizado correctamente.");
-      setUserProfile(result);
-    } catch (err) {
-      setError("Hubo un problema al actualizar el perfil. Inténtalo de nuevo.");
-    }
-  };
-  {isAuthenticated && currentPage === "miCuenta" && (
-    <MiCuenta user={user} userProfile={userProfile} handleLogout={handleLogout} />
-
-  )}
-  {currentPage === "ofertas" && <Ofertas usuario={user} />}
  
   return (
     <div className="container">
@@ -220,7 +162,7 @@ const App = () => {
           </div>
         </div>
       ) : (
-        <div className="contact-bar">
+        <div classNam e="contact-bar">
           <div className="center-section">
              <p>
               <a
